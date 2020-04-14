@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cranecloud-frontend
+  namespace: cranecloud
+  labels:
+    app: cranecloud-frontend
+spec:
+  replicas: 3
+  minReadySeconds: 15
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+        maxUnavailable: 1
+        maxSurge: 1
+  selector:
+    matchLabels:
+      app: cranecloud-frontend
+  template:
+    metadata:
+      labels:
+        app: cranecloud-frontend
+    spec:
+      containers:
+        - name: cranecloud-frontend
+          image: ckwagaba/crane-cloud-frontend:cde9069a76227727f9cf50dff5f95e3c440c3691
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: react-frontend
