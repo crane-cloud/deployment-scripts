@@ -1,5 +1,20 @@
+variable "project_id" {
+    type = string
+    default = "crane-cloud-274413"
+}
+
 variable "credentials" {
     type = string
+}
+
+variable "region" {
+    type = string
+    default = "us-central1"
+}
+
+variable "zone" {
+    type =  string
+    default = "us-central1-a"
 }
 
 variable "cluster" {
@@ -18,4 +33,9 @@ variable "database_password" {
 
 variable "database_user" {
     type = string
+}
+
+variable "node_count" {
+    type = number
+    default = 2
 }

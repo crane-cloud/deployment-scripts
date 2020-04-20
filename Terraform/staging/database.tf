@@ -2,7 +2,7 @@
 resource "google_sql_database_instance" "cranecloud-database" {
     name = var.sqlinstance
     database_version = "POSTGRES_11"
-    region = "us-central1"
+    region = var.region
 
     settings {
         tier = "db-custom-1-3840"

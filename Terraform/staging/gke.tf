@@ -1,8 +1,8 @@
 // The kubernetes cluster using default node pool
 resource "google_container_cluster" "cranecloud-gke" {
     name = var.cluster
-    location = "us-central1-a"
-    initial_node_count = 2
+    location = var.zone
+    initial_node_count = var.node_count
 
     master_auth {
         username = ""
