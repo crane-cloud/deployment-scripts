@@ -24,4 +24,12 @@ spec:
         backend:
           serviceName: cranecloud-backend
           servicePort: 80
+
+  - host: staging-docs.cranecloud.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: cranecloud-docs
+          servicePort: 80
   
