@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cranecloud-ingress
+  namespace: cranecloud-prod
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: cc-prod
+    networking.gke.io/v1beta1.FrontendConfig: cranecloud-frontend-config
+spec:
+  tls:
+    - hosts:
+        - api.cranecloud.io
+        - docs.cranecloud.io
+      secretName: cranecloud-tls-secret
+    - hosts:
+        - cranecloud.io
+      secretName: cranecloud-prod-tls-secret
+  rules:
+  - host: cranecloud.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: cranecloud-frontend
+          servicePort: 80
+
+  - host: api.cranecloud.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: cranecloud-backend
+          servicePort: 80
+
+  - host: docs.cranecloud.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: cranecloud-docs
+          servicePort: 80
+  

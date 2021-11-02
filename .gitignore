@@ -1,2 +1,6 @@
 kubernetes/backend/configmap.yml
 service_key.json
+certs/
+configmap.yml
+test
+local_cluster

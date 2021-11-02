@@ -39,3 +39,13 @@ variable "node_count" {
     type = number
     default = 2
 }
+
+variable "database_name" {
+    type = string
+    default = "cranecloud-staging-db"
+}
+
+variable "prod_database_name" {
+    type = string
+    default = "cranecloud-production-db"
+}

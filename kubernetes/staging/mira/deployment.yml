@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mira
+  namespace: cranecloud
+spec:
+  replicas: 3
+  minReadySeconds: 15
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: mira
+  template:
+    metadata:
+      labels:
+        app: mira
+    spec:
+      containers:
+        - name: mira
+          image: gcr.io/crane-cloud-274413/mira:f7a2dbb
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              name: mira
+          envFrom:
+            - configMapRef:
+                name: mira-variables
+    

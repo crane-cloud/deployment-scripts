@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cranecloud-docs
+  namespace: cranecloud-prod
+spec:
+  replicas: 2
+  minReadySeconds: 15
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: cranecloud-docs
+  template:
+    metadata:
+      labels:
+        app: cranecloud-docs
+    spec:
+      containers:
+        - name: cranecloud-docs
+          image: gcr.io/crane-cloud-274413/cranecloud-docs:831cb9e
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: cranecloud-docs

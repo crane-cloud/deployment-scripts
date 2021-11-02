@@ -18,12 +18,19 @@ resource "google_sql_database_instance" "cranecloud-database" {
     }
 }
 
-// create database
+// create staging database
 resource "google_sql_database" "cranecloud-database" {
-    name = "cranecloud-staging-db"
+    name = var.database_name
     instance = google_sql_database_instance.cranecloud-database.name
     charset = "UTF8"
     collation = "en_US.UTF8"
+}
+
+// create production database
+resource "google_sql_database" "cranecloud-prod-database" {
+    name = var.prod_database_name
+    instance = google_sql_database_instance.cranecloud-database.name
+    charset = "UTF8"
 }
 
 // create database user
